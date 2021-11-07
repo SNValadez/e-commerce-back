@@ -31,18 +31,8 @@ router.get('/:id', (req, res) => {
   Product.findOne({
     where: {
       id: req.params.id
-    },
-    attributes: ["id"],
-    include: [{
-      model: Category,
-      attributes: ["category_name"]
-      },
-      {
-        model: Tag,
-        attributes: ["tag_name"]
-      }
-
-    ]
+    }
+        
   })
   .then(dbProductData => {
     if (!dbProductData) {

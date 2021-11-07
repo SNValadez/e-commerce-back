@@ -28,11 +28,11 @@ router.get('/:id', (req, res) => {
   Tag.findOne({
     where: {
       id: req.params.id
-    },
-    include: {
+    }
+    /* include: {
       model: Product,
       attributes: ["product_name"]
-    }
+    } */
   })
   .then(dbTagData => res.json(dbTagData))
   .catch(err => {

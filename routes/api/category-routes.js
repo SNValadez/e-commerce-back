@@ -4,8 +4,10 @@ const { Category, Product } = require('../../models');
 // The `/api/categories` endpoint
 
 router.get('/', (req, res) => {
-  console.log("Hello World!")
-  res.send("Inside categories route.")
+  //console.log("Hello World!")
+  //res.send("Inside categories route.")
+  Category.hasMany(Product, { primaryKey: "id" })
+  Product.belongsTo(Category, { as: "Category", constraints: false })
   Category.findAll({
     include: {
       model: Product,
@@ -17,9 +19,7 @@ router.get('/', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   })
-
 }
-
   // find all categories
   // be sure to include its associated Products
 );
@@ -29,11 +29,11 @@ router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
       id: req.params.id
-    },
-    include: {
-      model: Product,
-      attributes: [category_id]
     }
+    //include: {
+      //model: Product,
+      //attributes: [category_id]
+    //}
   })
   .then(dbCategoryDat => res.json(dbCategoryDat))
   .catch(err => {
